@@ -26,9 +26,9 @@ jobs:
         with:
           hugo-version: "latest"
           extended: true
-          
+
       - name: Build
-        run: ${RUNNER_TEMP}/hugo
+        run: hugo --minify
 
       - name: Deploy
         if: github.ref == 'refs/heads/main'
