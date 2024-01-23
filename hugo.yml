@@ -1,4 +1,4 @@
-baseURL:"https://marksmultiverse.github.io/MMblog/"
+baseURL: "https://marksmultiverse.github.io/MMblog/"
 languageCode: en-us
 title: My New Hugo Site
 theme: PaperMod
