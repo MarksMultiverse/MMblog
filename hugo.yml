@@ -2,3 +2,48 @@ baseURL: "https://marksmultiverse.com/"
 languageCode: en-us
 title: Marks Multiverse
 theme: PaperMod
+
+menu:
+  main:
+    - name: Archive
+      url: archives
+      weight: 5
+    - name: Search
+      url: search/
+      weight: 10
+    - identifier: categories
+      name: categories
+      url: /categories/
+      weight: 10
+    - identifier: tags
+      name: tags
+      url: /tags/
+      weight: 20
+    - identifier: example
+      name: example.org
+      url: https://example.org
+      weight: 30
+
+  params:
+    languageAltTitle: French
+    profileMode:
+      enabled: true
+      title: PaperMod
+      imageUrl: "https://raw.githubusercontent.com/googlefonts/noto-emoji/master/svg/emoji_u1f9d1_1f3fb_200d_1f4bb.svg"
+      imageTitle: ProfileMode image
+      # imageWidth: 120
+      # imageHeight: 120
+      subtitle: "☄️ Fast | ☁️ Fluent | 🌙 Smooth | 📱 Responsive"
+      buttons:
+        - name: Blog
+          url: posts
+        - name: Profile Mode
+          url: https://github.com/adityatelange/hugo-PaperMod/wiki/Features#profile-mode
+
+  socialIcons:
+    - name: github
+      title: View Source on Github
+      url: "https://github.com/MarksMultiverse"
+    - name: linkedin
+      title: View my LinkedIn page
+      url: "https://www.linkedin.com/in/marktilleman/"
