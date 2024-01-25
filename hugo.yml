@@ -33,7 +33,7 @@ menu:
       imageTitle: ProfileMode image
       # imageWidth: 120
       # imageHeight: 120
-      subtitle: "☄️ Fast | ☁️ Fluent | 🌙 Smooth | 📱 Responsive"
+      subtitle: " Fast | Fluent | Smooth | Responsive"
       buttons:
         - name: Blog
           url: posts
