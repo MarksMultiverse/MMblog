@@ -14,35 +14,25 @@ languages:
     menu:
       main:
         - name: Archive
-          url: archives
+          url: /archives/
           weight: 5
         - name: Search
-          url: search/
+          url: /search/
           weight: 10
-        - identifier: categories
-          name: categories
+        - identifier: Categories
+          name: Categories
           url: /categories/
           weight: 10
-        - identifier: tags
-          name: tags
+        - identifier: Tags
+          name: Tags
           url: /tags/
           weight: 20
-        - identifier: example
-          name: example.org
-          url: https://example.org
-          weight: 30
 
 params:
   homeInfoParams:
-    Title: "PaperMod's Demo"
+    Title: "Marks Multiverse"
     Content: >
-      👋 Welcome to demo page of Hugo's theme PaperMod!
-
-      - **PaperMod**  is designed to be clean and simple but fast and responsive theme with useful feature-set that enhances UX.
-
-      - Feel free to show your support by giving us a star 🌟 on GitHub and sharing with your friends and social media .
-
-      - PaperMod is based on theme [Paper](https://github.com/nanxiaobei/hugo-paper/tree/4330c8b12aa48bfdecbcad6ad66145f679a430b3).
+      Welcome to my website, where I try to share everything I think is wordt sharing.
 
   socialIcons:
     - name: github
