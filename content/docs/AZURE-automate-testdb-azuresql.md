@@ -1,6 +1,6 @@
 +++
 title = 'Automate creation of test databases on Azure SQL with Active Directory security groups'
-date = 2023-09-11T12:00:46+02:00
+date = 2024-01-26T14:00:46+02:00
 draft = false
 tags = ["Azure", "Automation", "Azure SQL"]
 categories = ["Azure"]
