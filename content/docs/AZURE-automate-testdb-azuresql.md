@@ -2,26 +2,9 @@
 title = 'Automate creation of test databases on Azure SQL with Active Directory security groups'
 date = 2023-09-11T12:00:46+02:00
 draft = false
-authors = "Mark"
-tags = "Automation" "Azure SQL"
-categories = "Azure Automation"
-
-showToc = true
-TocOpen = false
-hidemeta = false
-comments = false
-description = "Desc Text."
-canonicalURL = "https://canonical.url/to/page"
-disableShare = false
-disableHLJS = false
-hideSummary = false
-searchHidden = true
-ShowReadingTime = true
-ShowBreadCrumbs = true
-ShowPostNavLinks = true
-ShowWordCount = true
-ShowRssButtonInSectionTermList = true
-UseHugoToc = true
+authors = 'Mark'
+tags = 'Automation'
+categories = 'Azure Automation'
 
 +++
 To make tests on the test databases so close the reality as possible it is common to make periodic copies of the production database and use the latest copy as test database. But how does that work in a scenario where you use Azure SQL and a traditional Active Directory instance? And on top of that you obviously want to automate that process!
