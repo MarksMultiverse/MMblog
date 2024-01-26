@@ -35,26 +35,26 @@ And now the fun part. The actual coding of the solution. First we have to fill t
 
 ![Variables](/Blog1-automate-testdb-azuresql/variables.jpg)
 
-Name | Comment
-- | -
+| Name | Comment |
+| - | - |
 | subscriptionId | The Subscription ID of the active subscription of the resources. |
-sourceResourceGroupName | The resource group name of the source database.
-sourceServerName | The name of the SQL server of the source database.
-sourceDBname | The name of the source database.
-targetResourceGroupname | The resource group name of the target database.
-targetServerName | The name of the SQL server of the target database.
-targetDBname | The name of the target database.
-ServerFQDN | The full name of the SQL server of the target database (.database.windows.net).
-Username | Service account used to set the permissions on the target database.
-Password | The password of the service account used.
+| sourceResourceGroupName | The resource group name of the source database. |
+| sourceServerName | The name of the SQL server of the source database. |
+| sourceDBname | The name of the source database. |
+| targetResourceGroupname | The resource group name of the target database. |
+| targetServerName | The name of the SQL server of the target database. |
+| targetDBname | The name of the target database. |
+| ServerFQDN | The full name of the SQL server of the target database (.database.windows.net). |
+| Username | Service account used to set the permissions on the target database. |
+| Password | The password of the service account used. |
 
-<mark>Please note that the password variable is saved as encrypted.</mark>
+==Please note that the password variable is saved as encrypted.==
 
 **Here we go!**
 
 First we set the variables we just set up in the automation account.
 
-### Set variables
+#### Set variables
 ```markdown
 $subscriptionId = Get-AutomationVariable -Name 'subscriptionId'
 $sourceResourceGroupName = Get-AutomationVariable -Name 'sourceResourceGroupName'
@@ -70,27 +70,27 @@ $Password = Get-AutomationVariable -Name 'Password'
 
 Of course we have to make ourself known within the environment and select the right subscription.
 
-### Connect to Azure
-```markdown
+#### Connect to Azure
+```
 Connect-AzAccount -Identity
 ```
-### Set subscrition
-```markdown
+#### Set subscrition
+```
 Set-AzContext -SubscriptionId $subscriptionId
 ```
 
 Remember the module we checked and added to the automation account? Those need to be imported.
 
-### Importing module
-```markdown
+#### Importing module
+```
 Import-Module Az.Sql -Force
 Import-Module sqlserver
 ```
 
 Then we want to make a copy of the PROD database to use as our TEST database. But if the TEST database already exist we first want to delete this database before we make a fresh copy of the database. This way we assure ourselves the we always test on the latest version.
 
-### Check if database is available. If not make new database. If present delete database and make new one
-```markdown
+#### Check if database is available. If not make new database. If present delete database and make new one
+```
 $OldDatabase = Get-AzSqlDatabase -ResourceGroupName $sourceResourceGroupName -ServerName $sourceServerName -DatabaseName $targetDBname -ErrorAction SilentlyContinue
 
 if ($OldDatabase -eq $null){
@@ -116,15 +116,15 @@ else{
 ```
 Now we have a new copy of the PROD database as our TEST database. All we have to do now is to add the AD security group for test purposes (Owner and Reader) and delete the AD security groups used for the PROD database (Owner and Reader). First we need a token to access the SQL server.
 
-### Get token to access the SQL server
-```markdown
+#### Get token to access the SQL server
+```
 $token = (Get-AzAccessToken -ResourceUrl https://database.windows.net).Token
 ```
 
 And finally we define the query where we add and delete the security groups and run it.
 
-### Set queries
-```markdown
+#### Set queries
+```
 $Params = @"    
                 CREATE USER [SQL-Owner-Users-Test] FROM EXTERNAL PROVIDER;
                 ALTER ROLE db_owner ADD MEMBER [SQL-Owner-Users-Test];
@@ -135,8 +135,8 @@ $Params = @"
 "@
 ```
 
-### Execute queries on target database
-```markdown
+#### Execute queries on target database
+```
 Invoke-Sqlcmd -ServerInstance $ServerFQDN -Database $targetDBname -AccessToken $token -Username $Username -Password $Password -Query $Params
 ```
 Save, publish and test the runbook. Make sure the service account has the right permissions to enter and alter databases on the SQL server.
