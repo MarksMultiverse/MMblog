@@ -29,7 +29,7 @@ Now we have to make sure that we give it the right permissions under Azure role 
 ![Azure role assignment](/AZURE-automate-testdb-sql/Azure-role-assignment.jpg)
 Make the automation account `admin` on the SQL server itself. This has to be done or else the automation account cannot alter the permissions of the database.
 ![Make the account admin](/AZURE-automate-testdb-sql/admin.jpg)
-Please make sure to check if the `Az.Sql` module is installed on the automation account. This should be the case. But we need another module to make the changes to the database itself. You need to install the `sqlserver` module by hand.
+Please make sure to check if the `Az.Sql` module is installed on the automation account. This should be the case. But we need another module to make the changes to the database itself. You need to install the `sqlserver` module manually.
 ![Install the right modules](/AZURE-automate-testdb-sql/module.jpg)
 
 And now the fun part. The actual coding of the solution. First we have to fill the variables in the automation account.
