@@ -32,7 +32,7 @@ Please make sure to check if the Az.Sql module is installed on the automation ac
 
 And now the fun part. The actual coding of the solution. First we have to fill the variables.
 
-![Variables](/static/AZURE-automate-testdb-sql/AZURE-automate-testdb-sql/variables.jpg)
+![Variables](/static/AZURE-automate-testdb-sql/variables.jpg)
 
 | Name | Comment |
 | - | - |
@@ -48,12 +48,6 @@ And now the fun part. The actual coding of the solution. First we have to fill t
 | Password | The password of the service account used. |
 
 *Please note that the password variable is saved as encrypted.*
-
-<span style="color:green;font-weight:700;font-size:20px">
-    Please note that the password variable is saved as encrypted.
-</span>
-
-<mark style="background-color: #FFFF00">Highlighted text</mark>
 
 **Here we go!**
 
