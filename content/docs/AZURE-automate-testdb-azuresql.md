@@ -20,7 +20,7 @@ Steps involved:
 ## Automation Account
 
 First you have to create a standard automation account in Azure. Nothing special. Nowadays a system assigned identity is automatically created. Great! 
-![Automation Account](/static/AZURE-automate-testdb-sql/aa-acount.jpg)
+![Automation Account](/docs/aa-acount.jpg)
 But we have to make sure that we give it the right permissions under Azure role assignments. I made the automation account Owner on the subscription. That did the trick for me, because I also would like to experiment with other SQL servers in the future.
 ![Azure role assignment](/static/AZURE-automate-testdb-sql/Azure-role-assignment.jpg)
 Now on the SQL server, make the automation account admin. This has to be done because else the automation account cannot alter the permissions of the database.
