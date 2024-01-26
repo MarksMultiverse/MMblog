@@ -48,7 +48,7 @@ And now the fun part. The actual coding of the solution. First we have to fill t
 | Username | Service account used to set the permissions on the target database. |
 | Password | The password of the service account used. |
 
-==Please note that the password variable is saved as encrypted.==
+<mark>Please note that the password variable is saved as encrypted.</mark>
 
 **Here we go!**
 
