@@ -3,8 +3,7 @@ title = 'Automate creation of test databases on Azure SQL with Active Directory 
 date = 2023-09-11T12:00:46+02:00
 draft = false
 authors = 'Mark'
-tags = 'Automation'
-categories = 'Azure Automation'
+
 
 +++
 To make tests on the test databases so close the reality as possible it is common to make periodic copies of the production database and use the latest copy as test database. But how does that work in a scenario where you use Azure SQL and a traditional Active Directory instance? And on top of that you obviously want to automate that process!
