@@ -3,7 +3,7 @@ title = 'Automate creation of test databases on Azure SQL with Active Directory 
 date = 2023-09-11T12:00:46+02:00
 draft = false
 authors = "Mark"
-tags = "Automation, Azure SQL"
+tags = "Automation" "Azure SQL"
 categories = "Azure Automation"
 
 showToc = true
