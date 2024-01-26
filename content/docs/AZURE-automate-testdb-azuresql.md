@@ -19,11 +19,11 @@ Steps involved:
 -	Create a runbook.
 -	Schedule the runbook.
 
-This is not a step-by-step tutorial but more a high over instuction.
+Note: This is not a step-by-step tutorial but more a high-over instruction.
 
 ## Automation Account
 
-First you have to create a standard automation account in Azure. Nothing special. Nowadays a system assigned identity is automatically created when creatin an automation account. Great! 
+First you have to create a standard automation account in Azure. Nothing special. Nowadays a system assigned identity is automatically created when creating an automation account. Great! 
 ![Automation Account](/AZURE-automate-testdb-sql/aa-acount.jpg)
 Now we have to make sure that we give it the right permissions under Azure role assignments. I made the automation account `Owner` on the subscription. That did the trick for me, because I also would like to experiment with other SQL servers in the future. Please consider giving the account other permissions in your production environment on the basis of least privilege principle.
 ![Azure role assignment](/AZURE-automate-testdb-sql/Azure-role-assignment.jpg)
@@ -32,7 +32,8 @@ Make the automation account `admin` on the SQL server itself. This has to be don
 Please make sure to check if the `Az.Sql` module is installed on the automation account. This should be the case. But we need another module to make the changes to the database itself. You need to install the `sqlserver` module manually.
 ![Install the right modules](/AZURE-automate-testdb-sql/module.jpg)
 
-And now the fun part. The actual coding of the solution. First we have to fill the variables in the automation account.
+And now the fun part. The actual coding of the solution. \
+First we have to fill the variables in the automation account.
 
 ![Variables](/AZURE-automate-testdb-sql/variables.jpg)
 
