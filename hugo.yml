@@ -19,7 +19,7 @@ params:
   homeInfoParams:
     Title: "Marks Multiverse"
     Content: >
-      Welcome to my website, where I try to share everything I think is wordt sharing.
+      Welcome to my website, where I try to share everything I think is worth sharing.
 
   socialIcons:
     - name: github

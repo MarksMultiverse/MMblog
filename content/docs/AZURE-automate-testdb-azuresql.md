@@ -6,32 +6,33 @@ tags = ["Azure", "Automation", "Azure SQL"]
 categories = ["Azure"]
 +++
 
-To make tests on the test databases so close the reality as possible it is common to make periodic copies of the production database and use the latest copy as test database. But how does that work in a scenario where you use Azure SQL and a traditional Active Directory instance? And on top of that you obviously want to automate that process!
+For database testing it is customary to make periodic copies of the production database and use the latest copy as a test database. But how does that work in a scenario where you use Azure SQL and a traditional Active Directory instance? And on top of that you obviously want to automate that process!
 
 ## Steps
 
 Steps involved:
--	Create Automation Account.
+-	Create an Automation Account.
 -	Give the automation account the right permissions.
 -	Make the automation account administrator on the SQL server.
 -	Check and add modules.
+-   Set the variables in the automation account.
 -	Create a runbook.
 -	Schedule the runbook.
 
+This is not a step-by-step tutorial but more a high over instuction.
+
 ## Automation Account
 
-First you have to create a standard automation account in Azure. Nothing special. Nowadays a system assigned identity is automatically created. Great! 
+First you have to create a standard automation account in Azure. Nothing special. Nowadays a system assigned identity is automatically created when creatin an automation account. Great! 
 ![Automation Account](/AZURE-automate-testdb-sql/aa-acount.jpg)
-But we have to make sure that we give it the right permissions under Azure role assignments. I made the automation account Owner on the subscription. That did the trick for me, because I also would like to experiment with other SQL servers in the future.
+Now we have to make sure that we give it the right permissions under Azure role assignments. I made the automation account `Owner` on the subscription. That did the trick for me, because I also would like to experiment with other SQL servers in the future. Please consider giving the account other permissions in your production environment on the basis of least privilege principle.
 ![Azure role assignment](/AZURE-automate-testdb-sql/Azure-role-assignment.jpg)
-Now on the SQL server, make the automation account admin. This has to be done because else the automation account cannot alter the permissions of the database.
+Make the automation account `admin` on the SQL server itself. This has to be done or else the automation account cannot alter the permissions of the database.
 ![Make the account admin](/AZURE-automate-testdb-sql/admin.jpg)
-Please make sure to check if the Az.Sql module is installed on the automation account. That should be the case. But we need another module to make the changes to the database itself. You need to install the sqlserver module by hand.
+Please make sure to check if the `Az.Sql` module is installed on the automation account. This should be the case. But we need another module to make the changes to the database itself. You need to install the `sqlserver` module by hand.
 ![Install the right modules](/AZURE-automate-testdb-sql/module.jpg)
 
-## Runbook
-
-And now the fun part. The actual coding of the solution. First we have to fill the variables.
+And now the fun part. The actual coding of the solution. First we have to fill the variables in the automation account.
 
 ![Variables](/AZURE-automate-testdb-sql/variables.jpg)
 
@@ -50,8 +51,9 @@ And now the fun part. The actual coding of the solution. First we have to fill t
 
 *Please note that the password variable is saved as encrypted.*
 
-**Here we go!**
+## Runbook
 
+Create a new runbook with type `Powershell` and use the code that is mentioned below.
 First we set the variables we just set up in the automation account.
 
 ```powershell
@@ -115,7 +117,8 @@ else{
                     -CopyDatabaseName $targetDBname
 }
 ```
-Now we have a new copy of the PROD database as our TEST database. All we have to do now is to add the AD security group for test purposes (Owner and Reader) and delete the AD security groups used for the PROD database (Owner and Reader). First we need a token to access the SQL server.
+Now we have a new copy of the PROD database as our TEST database. All we have to do now is to add the AD security group for test purposes (Owner and Reader) and delete the AD security groups used for the PROD database (Owner and Reader).\
+First we need a token to access the SQL server.
 
 ```powershell
 #Get token to access the SQL server
@@ -146,3 +149,56 @@ To top it all of you could add a schedule so you have a fresh test database on t
 ![Schedule the runbook](/AZURE-automate-testdb-sql/schedule1.jpg)
 
 That's all there is to it!
+
+Full runbook Powershell script:
+```Powershell
+#Connect to Azure
+Connect-AzAccount -Identity
+
+#Set subscrition
+Set-AzContext -SubscriptionId $subscriptionId
+
+#Importing module
+Import-Module Az.Sql -Force
+Import-Module sqlserver
+
+#Check if database is available. If not make new database. If present delete database and make new one
+$OldDatabase = Get-AzSqlDatabase -ResourceGroupName $sourceResourceGroupName -ServerName $sourceServerName -DatabaseName $targetDBname -ErrorAction SilentlyContinue
+
+if ($OldDatabase -eq $null){
+    $NewDatabase = New-AzSqlDatabaseCopy -ResourceGroupName $sourceResourceGroupName `
+                    -ServerName $sourceServerName `
+                    -DatabaseName $sourceDBname `
+                    -CopyResourceGroupName $targetResourceGroupname `
+                    -CopyServerName $targetServerName `
+                    -CopyDatabaseName $targetDBname
+}
+else{
+    $DeleteDatabase = Remove-AzSqlDatabase -ResourceGroupName $sourceResourceGroupName -ServerName $sourceServerName -DatabaseName $targetDBname
+    
+    Start-Sleep -Seconds 30
+    
+    $NewDatabase = New-AzSqlDatabaseCopy -ResourceGroupName $sourceResourceGroupName `
+                    -ServerName $sourceServerName `
+                    -DatabaseName $sourceDBname `
+                    -CopyResourceGroupName $targetResourceGroupname `
+                    -CopyServerName $targetServerName `
+                    -CopyDatabaseName $targetDBname
+}
+
+#Get token to access the SQL server
+$token = (Get-AzAccessToken -ResourceUrl https://database.windows.net).Token
+
+#Set queries
+$Params = @"    
+                CREATE USER [SQL-Owner-Users-Test] FROM EXTERNAL PROVIDER;
+                ALTER ROLE db_owner ADD MEMBER [SQL-Owner-Users-Test];
+                CREATE USER [SQL-Reader-Users-Test] FROM EXTERNAL PROVIDER;
+                ALTER ROLE db_datareader ADD MEMBER [SQL-Reader-Users-Test];
+                DROP USER [SQL-Owner-Users-Prod];
+                DROP USER [SQL-Reader-Users-Prod]
+"@
+
+#Execute queries on target database
+Invoke-Sqlcmd -ServerInstance $ServerFQDN -Database $targetDBname -AccessToken $token -Username $Username -Password $Password -Query $Params
+```
