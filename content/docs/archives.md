@@ -5,6 +5,6 @@ url: "/archives/"
 summary: archives
 hidemeta: true
 hideSummary: true
-disableHLJS = true
+disableHLJS : true
 
 ---
