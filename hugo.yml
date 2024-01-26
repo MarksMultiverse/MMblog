@@ -4,6 +4,8 @@ title: Marks Multiverse
 paginate: 5
 theme: PaperMod
 
+enableEmoji: true
+
 params:
   env: production
   title: Mark Multiverse
@@ -35,7 +37,7 @@ params:
 
   socialIcons:
     - name: github
-      title: View Source on Github
+      title: Github
       url: "https://github.com/MarksMultiverse"
     - name: linkedin
       title: View my LinkedIn page
@@ -51,3 +53,7 @@ menu:
       name: Tags
       url: /tags/
       weight: 20
+    - identifier: archives
+      name: Archives
+      url: /archives/
+      weight: 30
