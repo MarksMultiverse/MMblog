@@ -6,10 +6,11 @@ tags = ["Azure", "Automation", "Bicep", "AVD", "AIB"]
 categories = ["Bicep"]
 +++
 
-Of course we want to secure and keep our Azure tenant tidy with the help of Azure Policies. And without any hesitation I preach to automate everything! But what if these two conflict with one another? What if there is an Azure Policy in place that demands a naming standard or tags for resource groups that causes a Azure Image Builder deployment to fail? \
-With Azure Image Builder (AIB) we can automate the process of building images for use in an Azure Virtual Desktop environment for instance. AIB automatically creates a temporary resource group to store temporary resources which it needs to build the image (storage account, vnet ,vm, disk, etc.). When the build is complete Azure deletes most of these resources. This build resource group is given a random name that starts with IT_. When you have policies in place that enforce a certain naming convention of require certain tags on a resource group the AIB build will fail. There is a way to make sure that the resource group makes use of the right naming convention and tags.
+Of course we want to secure and keep our Azure tenant tidy with the help of Azure Policies. And without any hesitation I preach to automate everything! But what if these two mindsets conflict with one another? What if there is an Azure Policy in place that demands a naming standard or tags for resource groups that causes an automated Azure Image Builder deployment to fail? \
 
-So this blog covers two aspects:
+With Azure Image Builder (AIB) we can automate the process of building images for use in an Azure Virtual Desktop environment for instance. AIB automatically creates a resource group to store temporary resources which it needs to build the image (storage account, vnet ,vm, disk, etc.). When the build is complete Azure deletes most of these resources. This build resource group is given a random name that starts with `IT_`. When you have policies in place that enforce a certain naming convention of require certain tags on a resource group the AIB build will fail. But fortunately there is a way to make sure that the resource group makes use of the right naming convention and tags.
+
+So in general this blog covers two aspects:
 1. Automate AIB in Bicep
 2. Customize the build resource group for AIB
 
@@ -28,10 +29,6 @@ Steps involved:
 ## Overview
 
 In this example all resource groups must start with `RG-` and require the tags `Project` and `Responsible`. \
-We would like to see the following resources in our Azure subscription:
-
-
-## Bicep
 
 The complete Bicep files can be found in my GitHub repository <a href="https://github.com/MarksMultiverse/AIB-bicep">here</a>
 The automation contains five Bicep files:
@@ -46,7 +43,8 @@ This deployment results in the following resources in Azure:
 
 ### The main Bicep file
 
-This is the main bicep file that will be deployed to Azure. Please be aware that you have to change the `subscriptionID` value with tour Azure subscription ID.
+This is the main bicep file that will be deployed to Azure. \
+Please be aware that you have to change the `subscriptionID` value with tour Azure subscription ID.
 
 ```bicep
 targetScope = 'subscription'
@@ -116,7 +114,7 @@ module image 'aib-image.bicep' = {
   }
 }
 ```
-You see that there are four modules invoked by the file. With the `tags` and `RGnameAIB` parameter we can conform to the Azure Policy that defines the name of the resource group and the mandatory tags.
+There are four modules invoked by the file. With the `tags` and `RGnameAIB` parameter we can conform to the Azure Policy that defines the name of the resource group and the mandatory tags.
 
 ### Creating resource groups
 
@@ -148,7 +146,7 @@ resource RGAVDimagebuild 'Microsoft.Resources/resourceGroups@2023-07-01' = {
 ### Creating the Manages Identity and Custom Role
 
 
-We use the same managed identity to access the two resource geroups and build the image.
+We use the same managed identity to access the two resource groups and build the image.
 ![Managed Identity flow](/BICEP-automate-AIB/flow.jpg)
 Within the `aib-role.bicep` file we create the User Assigned Managed Identity and the Custom Role.
 
@@ -209,7 +207,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 ```
 
 The name value of the three resources created here all have variables in them. I prefer this to keep track of my image deployment.
-The `'Microsoft.VirtualMachineImages/imageTemplates/run/action'` action is not required for the actions done in the `RG-image` resource group. But is is required for the build of the image in the `RG-temp` and I want to use the same Managed Identity for this.
+The `'Microsoft.VirtualMachineImages/imageTemplates/run/action'` action is not required for the actions done in the `RG-image` resource group. But it is required for the build of the image in the `RG-temp` and I want to use the same Managed Identity for this.
 
 ### Set the Custom Role on the build resource group
 In the `aib-roletemp.bicep` file we assign the combination of the Managed Identity and Custom Role to the build resource group (`RG-temp`).
@@ -238,6 +236,7 @@ resource roleAssignmentAIBrg 'Microsoft.Authorization/roleAssignments@2022-04-01
 ```
 
 ### Create and build the image
+In the `Microsoft.VirtualMachineImages/imageTemplates` resource we create the image and we can customize it to fit our needs.
 
 ```bicep
 param location string
@@ -352,6 +351,6 @@ resource buildimage 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   ]
 }
 ```
-The ectual build of the image is done in Azure CLI. I hardcoded most of the image because it makes it easier to read. In production I would make more use of parameters. \
-To show how customizations are done I added AZCopy to the image. The storage account which was created automatically contains the log file of the build. This is very usefull when you add more customizations than AZcopy. <br>
+The actual build of the image is done in Azure CLI. I hardcoded most of the image because it makes it easier to read. In production I would make more use of parameters. \
+To show how customizations are done I added AZCopy to the image. The storage account which was created automatically contains the log file of the build. This is very usefull when you add more customizations than AZcopy. \
 Feel free to mess around with various customizations. That makes it all the more fun!
