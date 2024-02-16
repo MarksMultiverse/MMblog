@@ -1,6 +1,6 @@
 +++
 title = 'Automate Azure Image Builder in Bicep with custom builder resource group'
-date = 2024-02-16T11:00:46+02:00
+date = 2024-02-16T10:00:46+02:00
 draft = false
 tags = ["Azure", "Automation", "Bicep", "AVD", "AIB"]
 categories = ["Bicep"]
