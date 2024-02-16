@@ -6,7 +6,7 @@ tags = ["Azure", "Automation", "Bicep", "AVD", "AIB"]
 categories = ["Bicep"]
 +++
 
-Of course we want to secure and keep our Azure tenant tidy with the help of Azure Policies. And without any hesitation I preach to automate everything! But what if these two mindsets conflict with one another? What if there is an Azure Policy in place that demands a naming standard or tags for resource groups that causes an automated Azure Image Builder deployment to fail? \
+Of course we want to secure and keep our Azure tenant tidy with the help of Azure Policies. And without any hesitation I preach to automate everything! But what if these two mindsets conflict with one another? What if there is an Azure Policy in place that demands a naming standard or tags for resource groups that causes an automated Azure Image Builder deployment to fail? 
 
 With Azure Image Builder (AIB) we can automate the process of building images for use in an Azure Virtual Desktop environment for instance. AIB automatically creates a resource group to store temporary resources which it needs to build the image (storage account, vnet ,vm, disk, etc.). When the build is complete Azure deletes most of these resources. This build resource group is given a random name that starts with `IT_`. When you have policies in place that enforce a certain naming convention of require certain tags on a resource group the AIB build will fail. But fortunately there is a way to make sure that the resource group makes use of the right naming convention and tags.
 
@@ -28,7 +28,7 @@ Steps involved:
 
 ## Overview
 
-In this example all resource groups must start with `RG-` and require the tags `Project` and `Responsible`. \
+In this example all resource groups must start with `RG-` and require the tags `Project` and `Responsible`.
 
 The complete Bicep files can be found in my GitHub repository <a href="https://github.com/MarksMultiverse/AIB-bicep">here</a>
 The automation contains five Bicep files:
