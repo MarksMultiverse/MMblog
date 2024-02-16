@@ -352,9 +352,4 @@ resource buildimage 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   ]
 }
 ```
-The ectual build of the image is done in Azure CLI. I hardcoded most of the image because it makes it easier to read. In production I would make more use of parameters. To show how customizations are done I added AZCopy to the image. Fell free to mess around with various customizations. That makes it all the more fun!
-
-
-
-
-
+The ectual build of the image is done in Azure CLI. I hardcoded most of the image because it makes it easier to read. In production I would make more use of parameters. To show how customizations are done I added AZCopy to the image. Fell free to mess around with various customizations. That makes it all the more fun! The storage account which was created automatically contains the log file of the build. This is very usefull when you add more customizations than AZcopy.
