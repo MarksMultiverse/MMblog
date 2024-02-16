@@ -44,7 +44,7 @@ This deployment results in the following resources in Azure:
 ### The main Bicep file
 
 This is the main bicep file that will be deployed to Azure. \
-Please be aware that you have to change the `subscriptionID` value with tour Azure subscription ID.
+Please be aware that you have to change the `subscriptionID` value with your Azure subscription ID.
 
 ```bicep
 targetScope = 'subscription'
