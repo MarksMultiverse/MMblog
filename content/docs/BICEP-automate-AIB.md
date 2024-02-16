@@ -6,7 +6,7 @@ tags = ["Azure", "Automation", "Bicep", "AVD", "AIB"]
 categories = ["Bicep"]
 +++
 
-Of course we want to secure and keep our Azure tenant tidy with the help of Azure Policies. And without any hesitation I preach to automate everything! But what if these two conflict with one another? What if there is an Azure Policy in place that demands a naming standard or tags for resource groups that causes a Azure Image Builder deployment to fail?
+Of course we want to secure and keep our Azure tenant tidy with the help of Azure Policies. And without any hesitation I preach to automate everything! But what if these two conflict with one another? What if there is an Azure Policy in place that demands a naming standard or tags for resource groups that causes a Azure Image Builder deployment to fail?\
 With Azure Image Builder (AIB) we can automate the process of building images for use in an Azure Virtual Desktop environment for instance. AIB automatically creates a temporary resource group to store temporary resources which it needs to build the image (storage account, vnet ,vm, disk, etc.). When the build is complete Azure deletes most of these resources. This build resource group is given a random name that starts with IT_. When you have policies in place that enforce a certain naming convention of require certain tags on a resource group the AIB build will fail. There is a way to make sure that the resource group makes use of the right naming convention and tags.
 
 So this blog covers two aspects:
@@ -352,4 +352,6 @@ resource buildimage 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   ]
 }
 ```
-The ectual build of the image is done in Azure CLI. I hardcoded most of the image because it makes it easier to read. In production I would make more use of parameters. To show how customizations are done I added AZCopy to the image. Fell free to mess around with various customizations. That makes it all the more fun! The storage account which was created automatically contains the log file of the build. This is very usefull when you add more customizations than AZcopy.
+The ectual build of the image is done in Azure CLI. I hardcoded most of the image because it makes it easier to read. In production I would make more use of parameters. \
+To show how customizations are done I added AZCopy to the image. The storage account which was created automatically contains the log file of the build. This is very usefull when you add more customizations than AZcopy.\
+Feel free to mess around with various customizations. That makes it all the more fun!
