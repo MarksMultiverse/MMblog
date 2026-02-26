@@ -10,7 +10,7 @@ When I started in IT, I could fairly easily acquire knowledge on my own. I bough
 
 ## Goal
 
-IWith this blog we want to create a simple CI/CD pipeline in GitHub Actions that deploys resources to Microsoft Azure. Purely to gain hands-on knowledge through experimentation.
+With this blog we want to create a simple CI/CD pipeline in GitHub Actions that deploys resources to Microsoft Azure. Purely to gain hands-on knowledge through experimentation.
 
 ## Prerequisites
 - Access to an Azure subscription;
