@@ -25,7 +25,7 @@ To achieve a full deployment of resources in Azure, we will follow these steps:
 3. Create Infrastructure as Code
 4. Create a pipeline in GitHub Actions
 
-### 1. Authentication between GitHub and Azure
+### 1. Authentication between GitHub and Azure :lock:
 
 When two parties interact, they must first identify themselves to each other. Here we need to establish a trusted relationship between Azure and the GitHub repository. We start in Azure.
 
@@ -37,7 +37,7 @@ For the **Federated credential scenario**, select **GitHub Actions deploying Azu
 
 | Field | Value |
 |-------|-------|
-| Organization | https://github.com/<YOUR GITHUB NAME>/ |
+| Organization | Your GitHub username |
 | Repository | The name of your repository |
 | Entity Type | Branch |
 | Based on selection | Main |
@@ -56,14 +56,14 @@ In GitHub, we will now register this application. Go to the repository you want 
 
 Simple as that.
 
-### 2. Authorization of the App Registration
+### 2. Authorization of the App Registration :white_check_mark:
 Check whether your App Registration has the correct permissions on the subscription you want to use. The App Registration must have at least the Contributor role. If this is not the case, you need to fix this; otherwise, the deployment will fail. Keep in mind that if you want to assign role assignments on specific resources, you may also need additional permissions such as Owner or User Access Administrator.
 
-### 3. Create Infrastructure as Code
+### 3. Create Infrastructure as `Code`
 Which resources do we want to deploy? Which building blocks do we define? In this example, we deploy a simple Hello World web application. Because we are deploying to Azure and want to keep it as simple as possible, we use Bicep.
 The code you want to deploy is outside the scope of this blog. I chose a simple Hello World application running from an AKS cluster. This gives me tools to expand this concept further. The code is freely available on my [GitHub](https://github.com/MarksMultiverse/DevOps-Cloud-Engineer-Lab). You could also choose a simpler setup, such as deploying only a Resource Group and a Storage Account.
 
-### 4. Create a pipeline in GitHub Actions
+### 4. Create a pipeline in GitHub Actions :rocket:
 To trigger a deployment to Azure from GitHub, a YAML file is required in the .github/workflow directory in the GitHub repository.
 
 ```text
