@@ -61,7 +61,9 @@ Check whether your App Registration has the correct permissions on the subscript
 
 ### 3. Create Infrastructure as `Code`
 Which resources do we want to deploy? Which building blocks do we define? In this example, we deploy a simple Hello World web application. Because we are deploying to Azure and want to keep it as simple as possible, we use Bicep.
-The code you want to deploy is outside the scope of this blog. I chose a simple Hello World application running from an AKS cluster. This gives me tools to expand this concept further. The code is freely available on my [GitHub](https://github.com/MarksMultiverse/DevOps-Cloud-Engineer-Lab). You could also choose a simpler setup, such as deploying only a Resource Group and a Storage Account.
+The code you want to deploy is outside the scope of this blog. I chose a simple Hello World application running from an AKS cluster. This gives me tools to expand this concept further. The code is freely available on my [GitHub](https://github.com/MarksMultiverse/DevOps-Cloud-Engineer-Lab). 
+![Azure resources](/AZURE-DevOps-engineer-lab/situation.jpg)
+You could also choose a simpler setup, such as deploying only a Resource Group and a Storage Account.
 
 ### 4. Create a pipeline in GitHub Actions :rocket:
 To trigger a deployment to Azure from GitHub, a YAML file is required in the .github/workflow directory in the GitHub repository.
@@ -72,7 +74,7 @@ GitHub repository/
 │   └── workflows/
 │       └── random.yaml
 ```
-This YAML file can have any name. We use one Ubuntu runner (so we define one job with multiple steps).
+This YAML file can have any name. We use one Ubuntu runner, so we define one job with multiple steps.
 
 Let's dissect the yaml file.
 
