@@ -19,7 +19,7 @@ params:
   DateFormat: "January 2, 2006"
 
   ShowReadingTime: true
-  ShowShareButtons: true
+  ShowShareButtons: false
 
   homeInfoParams:
     Title: "Marks Multiverse"
