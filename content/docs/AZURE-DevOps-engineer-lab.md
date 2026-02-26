@@ -20,10 +20,10 @@ With this blog we want to create a simple CI/CD pipeline in GitHub Actions that 
 ## Actions
 
 To achieve a full deployment of resources in Azure, we will follow these steps:
-1. Authentication between GitHub and Azure
-2. Authorization of the App Registration
-3. Create Infrastructure as Code
-4. Create a pipeline in GitHub Actions
+1. Authentication between GitHub and Azure :lock:
+2. Authorization of the App Registration :white_check_mark:
+3. Create Infrastructure as `Code`
+4. Create a pipeline in GitHub Actions :rocket:
 
 ### 1. Authentication between GitHub and Azure :lock:
 
