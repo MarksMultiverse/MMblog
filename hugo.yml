@@ -6,6 +6,11 @@ theme: PaperMod
 
 enableEmoji: true
 
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
 params:
   title: Mark Multiverse
   description: "All thing I find worth sharing"
