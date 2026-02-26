@@ -1,3 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Azure SQL on Marks Multiverse</title><link>https://marksmultiverse.com/tags/azure-sql/</link><description>Recent content in Azure SQL on Marks Multiverse</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 26 Jan 2024 14:00:46 +0200</lastBuildDate><atom:link href="https://marksmultiverse.com/tags/azure-sql/index.xml" rel="self" type="application/rss+xml"/><item><title>Automate creation of test databases on Azure SQL with Active Directory security groups</title><link>https://marksmultiverse.com/docs/azure-automate-testdb-azuresql/</link><pubDate>Fri, 26 Jan 2024 14:00:46 +0200</pubDate><guid>https://marksmultiverse.com/docs/azure-automate-testdb-azuresql/</guid><description>For database testing it is customary to make periodic copies of the production database and use the latest copy as a test database. But how does that work in a scenario where you use Azure SQL and a traditional Active Directory instance? And on top of that you obviously want to automate that process!
-Steps Steps involved:
-Create an Automation Account. Give the automation account the right permissions. Make the automation account administrator on the SQL server.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure SQL on Marks Multiverse</title><link>https://marksmultiverse.com/tags/azure-sql/</link><description>Recent content in Azure SQL on Marks Multiverse</description><generator>Hugo -- 0.157.0</generator><language>en-us</language><lastBuildDate>Fri, 26 Jan 2024 14:00:46 +0200</lastBuildDate><atom:link href="https://marksmultiverse.com/tags/azure-sql/index.xml" rel="self" type="application/rss+xml"/><item><title>Automate creation of test databases on Azure SQL with Active Directory security groups</title><link>https://marksmultiverse.com/docs/azure-automate-testdb-azuresql/</link><pubDate>Fri, 26 Jan 2024 14:00:46 +0200</pubDate><guid>https://marksmultiverse.com/docs/azure-automate-testdb-azuresql/</guid><description>&lt;p&gt;For database testing it is customary to make periodic copies of the production database and use the latest copy as a test database. But how does that work in a scenario where you use Azure SQL and a traditional Active Directory instance? And on top of that you obviously want to automate that process!&lt;/p&gt;
+&lt;h2 id="steps"&gt;Steps&lt;/h2&gt;
+&lt;p&gt;Steps involved:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create an Automation Account.&lt;/li&gt;
+&lt;li&gt;Give the automation account the right permissions.&lt;/li&gt;
+&lt;li&gt;Make the automation account administrator on the SQL server.&lt;/li&gt;
+&lt;li&gt;Check and add modules.&lt;/li&gt;
+&lt;li&gt;Set the variables in the automation account.&lt;/li&gt;
+&lt;li&gt;Create a runbook.&lt;/li&gt;
+&lt;li&gt;Schedule the runbook.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note: This is not a step-by-step tutorial but more a high-over instruction.&lt;/p&gt;</description></item></channel></rss>
