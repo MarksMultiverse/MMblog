@@ -179,4 +179,4 @@ jobs:
 12. The Hello World application and its Ingress resource are deployed to make the application externally accessible.
     
 After pushing to the main branch (or pressing the Run workflow button), you can monitor the deployment in your GitHub repository under the Actions tab. This is also the place to troubleshoot if something did not go as expected.
-This GitHub to Microsoft Azure through GitHub Actions setup provides a foundation that you can expand into your own home lab environment. test
+This GitHub to Microsoft Azure through GitHub Actions setup provides a foundation that you can expand into your own home lab environment.
