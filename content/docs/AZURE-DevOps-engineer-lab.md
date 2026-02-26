@@ -64,7 +64,8 @@ Which resources do we want to deploy? Which building blocks do we define? In thi
 The code you want to deploy is outside the scope of this blog. I chose a simple Hello World application running from an AKS cluster. This gives me tools to expand this concept further. The code is freely available on my [GitHub](https://github.com/MarksMultiverse/DevOps-Cloud-Engineer-Lab). You could also choose a simpler setup, such as deploying only a Resource Group and a Storage Account.
 
 ### 4. Create a pipeline in GitHub Actions
-To trigger a deployment to Azure from GitHub, a YAML file is required in the .github/workflow directory in the GitHub repository. 
+To trigger a deployment to Azure from GitHub, a YAML file is required in the .github/workflow directory in the GitHub repository.
+
 ```text
 GitHub repository/
 ├── .github/
