@@ -37,7 +37,7 @@ For the **Federated credential scenario**, select **GitHub Actions deploying Azu
 
 | Field | Value |
 |-------|-------|
-| Organization | hhtps://github.com/<YOUR GITHUB NAME>/ |
+| Organization | https://github.com/<YOUR GITHUB NAME>/ |
 | Repository | The name of your repository |
 | Entity Type | Branch |
 | Based on selection | Main |
