@@ -65,7 +65,12 @@ The code you want to deploy is outside the scope of this blog. I chose a simple 
 
 ### 4. Create a pipeline in GitHub Actions
 To trigger a deployment to Azure from GitHub, a YAML file is required in the .github/workflow directory in the GitHub repository. 
-```GitHub repository ├── .github/ ├── workflows/ ├── random.yaml```
+```text
+GitHub repository/
+├── .github/
+│   └── workflows/
+│       └── random.yaml
+```
 This YAML file can have any name. We use one Ubuntu runner (so we define one job with multiple steps).
 
 Let's dissect the yaml file.
