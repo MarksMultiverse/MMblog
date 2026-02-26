@@ -1,5 +1,5 @@
 +++
-title - 'Getting started with GitHub Actions on Azure'
+title = 'Getting started with GitHub Actions on Azure'
 date = 2026-02-26T16:00:46+02:00
 draft = false
 tags = ["Azure", "Automation", "GitHub", "CI/CD"]
